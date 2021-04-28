@@ -60,6 +60,7 @@
   background-color: transparent; 
   border-color: #5d7bcc;
   color: #5d7bcc;
+  cursor: pointer;
 }
 
 .info {
