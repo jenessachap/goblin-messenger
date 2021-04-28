@@ -107,7 +107,7 @@ app.post('/signup',
     translationController.getMessages,
     (req, res) => {
         //once all the above is complete, respond with redirecting to main message page
-        if (res.locals.signUpWithExistingUser) res.status(200).json({ hasAccount: true });
+        if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
 
         else res.status(200).json(res.locals);
 });
