@@ -21,7 +21,7 @@ sessionController.isLoggedIn = (req, res, next) => {
 */
 sessionController.startSession = (req, res, next) => {
   console.log("now in Session Creator")
-  if (res.locals.signUpWithExistingUser) return next();
+  if (res.locals.rejectNewUser) return next();
 
   /* if (!res.locals.user) */ return next();
   if (!session) { try {

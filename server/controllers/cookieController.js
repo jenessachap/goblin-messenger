@@ -3,7 +3,7 @@ const { User } = require('./../models.js');
 
 // store the user id in a cookie for auth
 cookieController.setSSIDCookie = (req, res, next) => {
-  if (res.locals.signUpWithExistingUser) return next();
+  if (res.locals.rejectNewUser) return next();
 
     console.log(`we're in the cookie controller now`);
     console.log(req.cookies);
