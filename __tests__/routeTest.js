@@ -5,14 +5,14 @@ const server = 'http://localhost:3000';
 describe('Route Integration', () => {
   describe('/', () => {
     describe('GET', () => {
-      it('should respond with status 200', () => {
+      xit('should respond with status 200', () => {
         return request(server).get('/').expect(200);
       });
     });
   });
 
   describe('Invalid Path', () => {
-    it('should respond to invalid path with status 404', () => {
+    xit('should respond to invalid path with status 404', () => {
       return request(server).get('/nonexistant').expect(404);
     });
   });
@@ -27,7 +27,7 @@ describe('Route Integration', () => {
 
   describe('/messages', () => {
     describe('GET', () => {
-      it('should respond with status 200', () => {
+      xit('should respond with status 200', () => {
         return request(server).get('/messages').expect(200);
       });
     });
@@ -35,7 +35,7 @@ describe('Route Integration', () => {
 
   describe('/login', () => {
     describe('POST', () => {
-      it('should respond with status 200', () => {
+      xit('should respond with status 200', () => {
         return request(server).post('/login').expect(200);
       });
     });
