@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import future components
-import MainContainer from './components/containers/MainContainer.js'
+import UI from './pages/UI.js';
 
 class App extends Component {
     constructor(props) {
@@ -10,7 +9,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <MainContainer />
+                <UI />
+                {/* <MainContainer /> */}
             </div>
         );
     }
