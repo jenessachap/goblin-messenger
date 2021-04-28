@@ -26,14 +26,15 @@ class MessageContainer extends Component {
         this.myMessagesButton = this.myMessagesButton.bind(this);
     }
 
+    /** Why are sentMessages and myMessages the exact same function (excpet that they direct to a new view state)  */
     sentMessagesButton() {
         //fetch new messages
         fetch('/messages:username')
         .then(resp => resp.json())
         .then(data => {
             console.log(data)
-            this.props.updateMessages(data);
-            this.props.newView('sentmessages');
+            this.props.updateMessages(data); 
+            this.props.newView('sentmessages'); //this changes the state view
         })
     }
 
@@ -44,7 +45,7 @@ class MessageContainer extends Component {
         .then(data => {
             console.log(data)
             this.props.updateMessages(data);
-            this.props.newView('userpage');
+            this.props.newView('userpage'); //this changes the state view
         })
     }
 
@@ -52,11 +53,14 @@ class MessageContainer extends Component {
         const recipient = document.getElementById("receiverUsername");
         const newmessage = document.getElementById("newMessage");
         const message = {};
+        /* I think here is where I have changed the work "target" to the work "friend" on the backend
+        
+        --will coordinate with front end on this change */
         message.id = this.props.user._id;
-        message.targetUsername = recipient.value;
+        message.friendUsername = recipient.value;
         message.senderUsername = this.props.user.username;
         message.language = this.props.user.language;
-        message.message = newmessage.value;
+        message.text = newmessage.value;
         
         /* {
         id: the Id of the user sending the message

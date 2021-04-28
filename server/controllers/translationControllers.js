@@ -1,4 +1,4 @@
-const{ User, TransMess, SentMess }= require('../models');
+const{ User, Messages, Session }= require('../models');
 const { Translate } = require('@google-cloud/translate').v2;
 const path = require('path');
 const translationController = {};
@@ -9,13 +9,13 @@ const projectId = '112305914504973967363';
 //just make sure to not go over 500,000 characters translated, which I know is a lot
 //but just try to avoid sending looping calls to translate, ya feel?
 const keyFilename = path.resolve(__dirname, './../pandawhaleiterationproject-ce75c9c97be2.json')
-const tranlsate = new Translate({projectId, keyFilename});
+const translate = new Translate({projectId, keyFilename});
 
-//function that calls to google Tranlsate API
+//function that calls to google Translate API
 
 async function textTranslate(text, target) {
     console.log(`this is before api call`)
-  let translation = await tranlsate.translate(text, target);
+  let translation = await translate.translate(text, target);
   console.log(`this is after api call`)
 
   console.log('Translation:' + translation);
@@ -59,18 +59,19 @@ translationController.createSentMessage = async (req, res, next) => {
               return res.status(200).json(res.locals);
           } else {
             res.locals.target = response;
-            SentMess.create({
+            Messages.create({
                 senderId: req.body.id,
                 senderLang: req.body.language,
                 senderUsername: req.body.senderUsername,
                 receiverUsername: res.locals.target.username,
                 receiverId: res.locals.target._id,
                 receiverLang: res.locals.target.language,
-                input: req.body.message
+                sentMessage: req.body.sentMessage,
+                translatedMessage: req.body.translatedMessage
               })
               .then((newSentMess) => {
                   //store the newly created message in locals to be able to send to the API for translation
-                  res.locals.sentMess = newSentMess;
+                  res.locals.sentMessage = newSentMess;
                   next();
                 })
             }
@@ -91,12 +92,12 @@ translationController.sendForTranslation = async (req, res, next) => {
         res.locals.translation = req.body.message;
         next();
     } else {
-        res.locals.translation = await textTranslate(res.locals.sentMess.input, res.locals.target.language)
+        res.locals.translation = await textTranslate(res.locals.Messages.sentMessage, res.locals.target.language)
         next();
     }
 }
 
-//the middleware that will handle the creation of the translated message entry in the databse
+//the middleware that will handle the creation of the translated message entry in the database
 //the translated message will have the ID's of the sender and recipient included to allow for specific lookup of 
 //only the desired messages
 translationController.createTranslatedMessage = async (req, res, next) => {
@@ -108,9 +109,8 @@ translationController.createTranslatedMessage = async (req, res, next) => {
         receiverUsername: res.locals.target.username,
         receiverId: res.locals.target._id,
         receiverLang: res.locals.target.language,
-        input: res.locals.translation
-
-
+        sentMessage: req.body.sentMessage,
+        translatedMessage: req.body.translatedMessage
     })
     res.locals.user = res.locals.target;
     next();
@@ -124,8 +124,8 @@ translationController.getMessages = async (req, res, next) => {
         console.log(req.params.username)
 
         res.locals.messages = {};
-        res.locals.messages.received = await TransMess.find({receiverId: res.locals.user._id});
-        res.locals.messages.sent = await SentMess.find({senderId: res.locals.user._id});
+        res.locals.messages.received = await Messages.find({receiverId: res.locals.user._id});
+        res.locals.messages.sent = await Messages.find({senderId: res.locals.user._id});
         return next();
     } else{
         next();
