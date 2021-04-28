@@ -1,0 +1,19 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    color: #c4d0f0;
+    text-decoration: none;
+    margin: 0px;
+    background-image: url("./img/background-blue.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover
+}
