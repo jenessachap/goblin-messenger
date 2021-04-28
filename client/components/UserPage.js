@@ -1,7 +1,6 @@
 import React from 'react';
 import NewMessage from './NewMessage';
 import MessageBox from './MessageBox';
-import logo from '../img/logo.svg';
 
 
 const UserPage = props => {
@@ -35,16 +34,20 @@ const UserPage = props => {
     }
     return (
         <div>
-            <div className="userPageLogo">
-                <img id="userPageLogo" src={logo} alt="Multicommunicado" />
-            </div>
+
             <div className="userPageContainer">
 
                 <div className="userNavBar">
-                    <button className="logoutButton" onClick={() => props.logout(null)}>Logout</button>
-                    <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>Create New</button>
+                    <button
+                        className="NavButton"
+                        onClick={() => props.logout(null)}
+                    >Logout</button>
+                    <button
+                        className="NavButton"
+                    >Back</button>
+                    {/* <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>Create New</button>
                     <button className="userNavBarButton" onClick={() => props.newView('sentmessages')}>Sent Messages</button>
-                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button>
+                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */}
                 </div>
                 <div>
                     {content}
