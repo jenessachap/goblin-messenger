@@ -16,41 +16,23 @@ mongoose.connect(MONGO_URI, {
 
 const Schema = mongoose.Schema;
 
-const sentMessageSchema = new Schema({
+const messageSchema = new Schema({
     senderId: {type: String, required: true},
     senderLang: {type: String, required: true},
     senderUsername: {type: String, required: true},
     receiverUsername: {type: String, required: true},
     receiverId: {type: String, required: true},
     receiverLang: {type: String, required: true},
-    // input: {type: String, required: true}
-
-    //iteration idea
     sentMessage: {type: String, required: true},
     translatedMessage: {type: String, required: true}
-
-
 });
-const SentMess = mongoose.model('sent_messages', sentMessageSchema);
+const Messages = mongoose.model('messages', messageSchema);
 
-
-const transMessageSchema = new Schema({
-    senderId: {type: String, required: true},
-    senderLang: {type: String, required: true},
-    senderUsername: {type: String, required: true},
-    receiverUsername: {type: String, required: true},
-    receiverId: {type: String, required: true},
-    receiverLang: {type: String, required: true},
-    input: {type: String, required: true}
-});
-const TransMess = mongoose.model('trans_messages', transMessageSchema);
 
 const userSchema = new Schema({
     username: {type: String},
     password: {type: String},
     language: {type: String}
-    // username: {type: String, required: true, unique: true},
-    // password: {type: String, required: true}
   });
   
   const User = mongoose.model('User', userSchema);
@@ -63,8 +45,7 @@ const userSchema = new Schema({
   const Session = mongoose.model('Session', sessionSchema);
 
 module.exports = {
-    SentMess,
-    TransMess,
+    Messages,
     User,
     Session
 };
