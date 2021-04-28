@@ -1,13 +1,13 @@
-import React from 'react'; 
-import { render } from 'react-dom'; 
-import { Provider } from 'react-redux'; 
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import store from './state/store.js';
 import App from './App.js';
-import styles from './styles.css';
+import './index.css';
 
 render(
-  <Provider store={store}> 
+  <Provider store={store}>
     <App />
-  </Provider>, 
+  </Provider>,
   document.getElementById('root')
-); 
+);

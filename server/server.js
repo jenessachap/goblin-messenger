@@ -95,21 +95,22 @@ app.get(
 
 //** Signup **//
 //when signup buttong is triggered, lanches a post req;
-app.post(
-  '/signup',
-  //first go to the create user middleware
-  userController.createUser,
-  //then go to start session
-  sessionController.startSession,
-  // then set cookie
-  cookieController.setSSIDCookie,
-  // get sent message data
-  translationController.getMessages,
-  (req, res) => {
-    //once all the above is complete, respond with redirecting to main message page
-    res.status(200).json(res.locals);
-  }
-);
+app.post('/signup', 
+    //first go to the create user middleware
+    userController.findOneUser,
+    userController.createUser,
+    //then go to start session
+    sessionController.startSession,
+    // then set cookie
+    cookieController.setSSIDCookie,
+    // get sent message data
+    translationController.getMessages,
+    (req, res) => {
+        //once all the above is complete, respond with redirecting to main message page
+        if (res.locals.signUpWithExistingUser) res.status(200).json({ hasAccount: true });
+
+        else res.status(200).json(res.locals);
+});
 
 //** Login **//
 //when login button is triggered, launch post req
