@@ -24,9 +24,9 @@ userController.findOneUser = (req, res, next) => {
       console.log('data', data);
       if (data) {
         console.log('existing user:', data);
-        res.locals.signUpWithExistingUser = true;
+        res.locals.rejectNewUser = true;
       }
-      else res.locals.signUpWithExistingUser = false;
+      else res.locals.rejectNewUser = false;
       return next();
     })
     .catch(
@@ -44,8 +44,8 @@ userController.createUser = async (req, res, next) => {
       username === '' ||
       password === '' ||
       language === ''
-    ) res.locals.signUpWithExistingUser = true;
-    if (res.locals.signUpWithExistingUser) return next();
+    ) res.locals.rejectNewUser = true;
+    if (res.locals.rejectNewUser) return next();
 
     console.log('username, password', username, password)
     // if(username === ''){
