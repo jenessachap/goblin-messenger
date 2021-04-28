@@ -2,4 +2,6 @@ node_modules
 build
 .DS_Store
 server/.DS_Store
+server/serviceAccountFile.json
 server/pandawhaleiterationproject-ce75c9c97be2.json
+package-lock.json

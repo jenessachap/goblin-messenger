@@ -29,24 +29,24 @@ class MessageContainer extends Component {
     /** Why are sentMessages and myMessages the exact same function (excpet that they direct to a new view state)  */
     sentMessagesButton() {
         //fetch new messages
-        fetch('/messages:username')
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            this.props.updateMessages(data); 
-            this.props.newView('sentmessages'); //this changes the state view
-        })
+        fetch('/messages/:username')
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                this.props.updateMessages(data);
+                this.props.newView('sentmessages'); //this changes the state view
+            })
     }
 
     myMessagesButton() {
         //fetch new messages
         fetch('/messages')
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            this.props.updateMessages(data);
-            this.props.newView('userpage'); //this changes the state view
-        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                this.props.updateMessages(data);
+                this.props.newView('userpage'); //this changes the state view
+            })
     }
 
     sendMessage() {
@@ -60,8 +60,8 @@ class MessageContainer extends Component {
         message.friendUsername = recipient.value;
         message.senderUsername = this.props.user.username;
         message.language = this.props.user.language;
-        message.text = newmessage.value;
-        
+        message.message = newmessage.value;
+
         /* {
         id: the Id of the user sending the message
         senderUsername: the message sender's username,
@@ -75,34 +75,34 @@ class MessageContainer extends Component {
                 'Content-Type': 'Application/JSON'
             },
             body: JSON.stringify(message)
-            })
-        .then(resp => resp.json())
-        .then(data => {
-            if (data.noRecipient) {this.props.userInfo('noRecipient')}
-            else if (data.noMessage) {this.props.userInfo('noMessage')}
-            else if (data.userNotFound) {this.props.userInfo('userUnknown')}
-            else {
-                console.log('new messages', data)
-                recipient.value = '';
-                newmessage.value = '';
-                this.props.updateMessages(data.messages)
-                // alert('Message sent!');
-            }
         })
-        .catch(err => console.log('Error sending new message! ERROR: ', err));
+            .then(resp => resp.json())
+            .then(data => {
+                if (data.noRecipient) { this.props.userInfo('noRecipient') }
+                else if (data.noMessage) { this.props.userInfo('noMessage') }
+                else if (data.userNotFound) { this.props.userInfo('userUnknown') }
+                else {
+                    console.log('new messages', data)
+                    recipient.value = '';
+                    newmessage.value = '';
+                    this.props.updateMessages(data.messages)
+                    // alert('Message sent!');
+                }
+            })
+            .catch(err => console.log('Error sending new message! ERROR: ', err));
     }
 
     render() {
         return (<UserPage info={this.props.user_info}
-                            send={this.sendMessage}
-                            view={this.props.view}
-                            newView={this.props.newView}
-                            messages={this.props.messages}
-                            user={this.props.user}
-                            logout={this.props.nowLoggedIn}
-                            sentMessagesClick={this.sentMessagesButton}
-                            myMessagesClick={this.myMessagesButton}
-                            />)
+            send={this.sendMessage}
+            view={this.props.view}
+            newView={this.props.newView}
+            messages={this.props.messages}
+            user={this.props.user}
+            logout={this.props.nowLoggedIn}
+            sentMessagesClick={this.sentMessagesButton}
+            myMessagesClick={this.myMessagesButton}
+        />)
     }
 }
 

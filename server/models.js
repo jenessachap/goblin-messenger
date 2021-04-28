@@ -4,7 +4,7 @@ console.log("cool, now we're in the models.js file")
 
 const MONGO_URI = "mongodb+srv://goblin:shark@cluster0.kpvr3.mongodb.net/MultiCommunicado?retryWrites=true&w=majority"
 
-// console.log("we made it past the db declaration")
+console.log("we made it past the db declaration")
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -23,8 +23,9 @@ const messageSchema = new Schema({
     receiverUsername: {type: String, required: true},
     receiverId: {type: String, required: true},
     receiverLang: {type: String, required: true},
-    sentMessage: {type: String, required: true},
-    translatedMessage: {type: String, required: true}
+    sentText: {type: String, required: true},
+    transText: {type: String, required: true},
+    timeSent: { type: Date, default: Date.now}
 });
 const Messages = mongoose.model('messages', messageSchema);
 
