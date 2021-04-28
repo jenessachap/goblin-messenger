@@ -40,19 +40,26 @@ userController.findOneUser = (req, res, next) => {
 userController.createUser = async (req, res, next) => {
     console.log(req.body)
     const { username, password, language } = req.body;
+    if (
+      username === '' ||
+      password === '' ||
+      language === ''
+    ) res.locals.signUpWithExistingUser = true;
     if (res.locals.signUpWithExistingUser) return next();
-    if(username === ''){
-        res.locals.noUsername = true;
-        res.json(res.locals);
-    }
-    if(password === ''){
-        res.locals.noPassword = true;
-        res.json(res.locals);
-    }
-    if(language === ''){
-        res.locals.noLanguage = true;
-        res.json(res.locals);
-    }
+
+    console.log('username, password', username, password)
+    // if(username === ''){
+    //     res.locals.noUsername = true;
+    //     res.json(res.locals);
+    // }
+    // if(password === ''){
+    //     res.locals.noPassword = true;
+    //     res.json(res.locals);
+    // }
+    // if(language === ''){
+    //     res.locals.noLanguage = true;
+    //     res.json(res.locals);
+    // }
 
 
     try {
