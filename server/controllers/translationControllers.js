@@ -127,7 +127,7 @@ translationController.createTranslatedMessage = async (req, res, next) => {
 // as well as the messages that the user has sent pre translation.
 
 translationController.getMessages = async (req, res, next) => {
-  if (res.locals.signUpWithExistingUser) return next();
+  if (res.locals.rejectNewUser) return next();
 
   if (res.locals.user) {
     console.log(req.params.username);
