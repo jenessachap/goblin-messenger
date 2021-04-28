@@ -1,0 +1,35 @@
+.ConvoFeed-Container {
+  width: 30vw;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.733);
+  margin: auto;
+  padding: 10px;
+}
+
+.ConvoFeedContent-Row {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ConvoFeedContent-Text {
+  color: black;
+  font-weight: 700;
+  padding: 7px;
+  display: inline;
+  border-radius: 5px;
+}
+
+.User {
+  grid-column: 2;
+  justify-self: end;
+  background-color: rgba(41, 158, 48, .2);
+}
+
+.Friend {
+  grid-column: 1;
+  justify-self: start;
+  background-color: rgba(158, 41, 54, .3);
+}
