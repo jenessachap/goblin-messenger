@@ -7,20 +7,26 @@ import ConvoFeedForm from '../components/ConvoFeedForm';
 import logo from '../img/logo.svg';
 import './Home.css';
 import RecentConvos from '../components/RecentConvos';
+import RecentConvoButton from '../components/RecentConvoButton';
+
 
 const mapStateToProps = store => ({
   user: store.message.user,
   loggedIn: store.message.login_state,
   messages: store.message.messages,
   view: store.message.view,
-  user_info: store.message.user_info
+  user_info: store.message.user_info,
+  convoName: store.message.convoName,
+  convoMessages: store.message.convoMessages
 })
 
-const dispatchStateToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   nowLoggedIn: (info) => dispatch(actions.loggedinState(info)),
   newView: (view) => dispatch(actions.view(view)),
   userInfo: (info) => dispatch(actions.userInfo(info)),
-  updateMessages: (messages) => dispatch(actions.updateMessages(messages))
+  updateMessages: (messages) => dispatch(actions.updateMessages(messages)),
+  setConvoName: (convoName) => dispatch(actions.setConvoName(convoName)),
+  updateConvoMessages: (convoName) => dispatch(actions.updateConvoMessages(convoName))
 })
 
 class Home extends Component {
@@ -90,29 +96,41 @@ class Home extends Component {
     return (
       <div className="Home-Container">
         <img className="Home-Logo" id="userPageLogo" src={logo} alt="Multicommunicado" />
-        <UserPage info={this.props.user_info}
-          send={this.sendMessage}
-          view={this.props.view}
-          newView={this.props.newView}
-          messages={this.props.messages}
-          user={this.props.user}
-          logout={this.props.nowLoggedIn}
-          sentMessagesClick={this.sentMessagesButton}
-          myMessagesClick={this.myMessagesButton}
+        <UserPage 
+            info={this.props.user_info}
+            send={this.sendMessage}
+            view={this.props.view}
+            newView={this.props.newView}
+            messages={this.props.messages}
+            user={this.props.user}
+            logout={this.props.nowLoggedIn}
+            sentMessagesClick={this.sentMessagesButton}
+            myMessagesClick={this.myMessagesButton}
         />
         <div className="Home-ConvoFeed-Container">
-          <RecentConvos view={this.props.view}
+          <RecentConvos 
+            view={this.props.view}
             newView={this.props.newView}
-            user={this.props.user} />
-          {/* <ConvoFeed />
-          <ConvoFeedForm /> */}
+            user={this.props.user} 
+            setConvoName={this.props.setConvoName}
+            updateConvoMessages={this.props.updateConvoMessages}
+          />
+          <ConvoFeed 
+            convoName={this.props.convoName} 
+            updateConvoMessages={this.props.updateConvoMessages}
+            convoMessages={this.props.convoMessages}
+            user={this.props.user} 
+          />
+          <ConvoFeedForm
+            convoName={this.props.convoName} 
+          />
         </div>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, dispatchStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 
 
