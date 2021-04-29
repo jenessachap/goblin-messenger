@@ -3,7 +3,9 @@ const messageController ={}
 
 messageController.getRecentMessages = (req, res, next) => {
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
- 
+  
+  console.log(res.locals.user);
+
   try{
     const username = res.locals.user.username;
     
