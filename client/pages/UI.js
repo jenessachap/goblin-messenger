@@ -106,7 +106,7 @@ class UI extends Component {
     }
     if (this.props.signingUp) { // === 'true'
       // return signup page
-      return (<Signup signup={this.userSignedUp} />)
+      return (<Signup signup={this.userSignedUp} returnToLogin={this.props.nowLoggedIn}/>)
     } else {
       // return login page
       return (<Login info={this.props.loggedIn} onSignUpClick={this.props.nowSigningUp} submitLogin={this.userLoggedIn} />)
