@@ -57,10 +57,9 @@
 }
 
 .loginSignupButton:hover {
-  background-color: transparent; 
-  border-color: #5d7bcc;
-  color: #5d7bcc;
   cursor: pointer;
+  background-color: #df5210; 
+  border-color: #df5210;
 }
 
 .info {

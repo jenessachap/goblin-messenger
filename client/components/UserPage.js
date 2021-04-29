@@ -5,7 +5,49 @@ import MessageBox from './MessageBox';
 
 const UserPage = props => {
     let content = [];
-    switch (props.view) {
+    switch (props.view) {        
+        case "newmessage":
+            content.push(<NewMessage key={900} info={props.info} key={999} id="newmsg" send={props.send} />);
+        default:
+            break;
+    }
+    return (
+        <div>
+            <div className="userPageContainer">
+
+                <div className="userNavBar">
+                    <button
+                        className="NavButton"
+                        onClick={() => props.logout(null)}
+                    >Logout</button>
+                    {/* <button
+                        className="NavButton"
+                    >Back</button> */}
+                    <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>New Friend</button>
+                    {/* <button className="userNavBarButton" onClick={() => props.newView('sentmessages')}>Sent Messages</button>
+                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */}
+                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>Home</button>
+                </div>
+                <div>
+                    {content}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default UserPage;
+
+
+
+
+
+
+
+
+
+
+
 
 
         /************************************************************
@@ -61,40 +103,8 @@ const UserPage = props => {
         //         content.push(<div className="emptyMessages" >You haven't sent any messages yet! Send a new message above!</div>)
         //         break;
         //     }
-            // create a new message for every message received
-            // for (let i = props.messages.sent.length - 1; i >= 0; i--) {
-            //     content.push(<MessageBox id={i} username={'To: ' + props.messages.sent[i].receiverUsername} message={props.messages.sent[i]} />)
-            // }
-            // break;
-        case "newmessage":
-            content.push(<NewMessage key={900} info={props.info} key={999} id="newmsg" send={props.send} />);
-        default:
-            break;
-    }
-    return (
-        <div>
-
-            <div className="userPageContainer">
-
-                <div className="userNavBar">
-                    <button
-                        className="NavButton"
-                        onClick={() => props.logout(null)}
-                    >Logout</button>
-                    <button
-                        className="NavButton"
-                    >Back</button>
-                    <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>Create New</button>
-                    {/* <button className="userNavBarButton" onClick={() => props.newView('sentmessages')}>Sent Messages</button>
-                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */} 
-                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>Home</button>
-                </div>
-                <div>
-                    {content}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-export default UserPage;
+        // create a new message for every message received
+        // for (let i = props.messages.sent.length - 1; i >= 0; i--) {
+        //     content.push(<MessageBox id={i} username={'To: ' + props.messages.sent[i].receiverUsername} message={props.messages.sent[i]} />)
+        // }
+        // break;

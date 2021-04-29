@@ -63,14 +63,6 @@ class Home extends Component {
     message.senderUsername = this.props.user.username;
     message.language = this.props.user.language;
     message.message = newmessage.value;
-
-    /* {
-    id: the Id of the user sending the message
-    senderUsername: the message sender's username,
-    targetUsername: the message recipient's username,
-    language: the language code assigned from the initial sender
-    message: the actual text to translate
-    }*/
     fetch('/send', {
       method: 'POST',
       headers: {
@@ -109,9 +101,11 @@ class Home extends Component {
           myMessagesClick={this.myMessagesButton}
         />
         <div className="Home-ConvoFeed-Container">
-          <RecentConvos user={this.props.user} />
-          <ConvoFeed />
-          <ConvoFeedForm />
+          <RecentConvos view={this.props.view}
+            newView={this.props.newView}
+            user={this.props.user} />
+          {/* <ConvoFeed />
+          <ConvoFeedForm /> */}
         </div>
       </div>
     )
@@ -119,3 +113,14 @@ class Home extends Component {
 }
 
 export default connect(mapStateToProps, dispatchStateToProps)(Home);
+
+
+
+
+/* {
+id: the Id of the user sending the message
+senderUsername: the message sender's username,
+targetUsername: the message recipient's username,
+language: the language code assigned from the initial sender
+message: the actual text to translate
+}*/
