@@ -5,7 +5,7 @@ messageController.getRecentMessages = (req, res, next) => {
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
  
   try{
-    const username = 'Jenessa'
+    const username = res.locals.user.username;
     
     const recentReceivedArr = Messages.aggregate([
       {
