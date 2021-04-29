@@ -13,7 +13,8 @@ body {
     text-decoration: none;
     margin: 0px;
     background-image: url("./img/background-blue.jpg");
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover
 }
