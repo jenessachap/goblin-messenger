@@ -5,6 +5,7 @@ import UserPage from '../components/UserPage';
 import ConvoFeed from '../components/ConvoFeed';
 import logo from '../img/logo.svg';
 import './Home.css';
+import RecentConvos from '../components/RecentConvos';
 
 const mapStateToProps = store => ({
   user: store.message.user,
@@ -106,6 +107,7 @@ class Home extends Component {
           sentMessagesClick={this.sentMessagesButton}
           myMessagesClick={this.myMessagesButton}
         />
+        <RecentConvos user={this.props.user}/>
         <ConvoFeed />
       </div>
     )

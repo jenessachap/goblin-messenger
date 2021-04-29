@@ -23,19 +23,18 @@ cookieController.setSSIDCookie = (req, res, next) => {
 };
 
 cookieController.findUserByCookie = (req, res, next) => {
-  User.findOne({ _id: req.cookies.ssid })
-    .then((response) => (res.locals.user = response))
-    .then(next())
-    .catch((err) => {
-      if (err)
-        return next({
-          log: `cookieController.findUserByCookie: ERROR: Did not properly find user by cookie`,
-          message: {
-            err:
-              "cookieController.findUserByCookie: ERROR: Check server logs for details",
-          },
-        });
-    });
-};
+  console.log(`this is the req from the findUserByCookie ${req}`);
+
+    User.findOne({_id: req.cookies.ssid})
+      .then((response) => res.locals.user = response)
+      .then(next())
+      .catch((err)=>{
+          if (err) return next({
+            log: `cookieController.findUserByCookie: ERROR: Did not properly find user by cookie`,
+            message: { err: 'cookieController.findUserByCookie: ERROR: Check server logs for details' }
+        })
+    })
+}
+
 
 module.exports = cookieController;

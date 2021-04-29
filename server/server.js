@@ -7,12 +7,13 @@ const translationController = require('./controllers/translationControllers');
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const messageController = require('./controllers/messageController')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 
-// app.use(cors());
+app.use(cors());
 
 //** Serve all compiled files when running the production build **/
 app.use(express.static(path.resolve(__dirname, '../client')));
@@ -30,6 +31,13 @@ app.get('/signup', (req, res) => {
   res.render('./..client/signup', { error: null });
 });
 
+app.get('/messages/recent', 
+  cookieController.findUserByCookie,
+  messageController.getRecentMessages, 
+  (req, res) => {
+    res.status(200).json(res.locals.recentMessages);
+})
+
 app.get(
   '/messages/:username',
   //gets user info based on the cookie associated with get request
@@ -43,44 +51,6 @@ app.get(
   }
 );
 
-//Get request, ask db for filterd messages.
-/* 
-a single array, where 
-(senderUsername = myUsername OR senderUsername = friendUsername) 
-AND (receiverUsername = friendUsername  OR receiverUsername = myUsername)
-
-obj {
-    
-}
-
-*/
-/*
-{
-array1 ={
-senderUsername = myUsername 
-receiverUsername = friendUsername 
-messagelanduger for myusername
-}
-
-array2 = {
-senderUsername = friendUsername
-receiverUsername = myUsername
-}
-}
-*/
-
-//
-app.get(
-  '/messages',
-  //gets user info based on the cookie associated with get request
-  cookieController.findUserByCookie,
-  //uses user info from previous middleware to
-  translationController.getMessages,
-  //sends along pertinent info
-  (req, res) => {
-    res.status(200).json(res.locals);
-  }
-);
 
 //logout route to end session and clear cookie
 app.get(
@@ -108,7 +78,7 @@ app.post('/signup',
     (req, res) => {
         //once all the above is complete, respond with redirecting to main message page
         if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
-        if (res.locals.badInput) res.status(200).json({ badInput: true });
+        else if (res.locals.badInput) res.status(200).json({ badInput: true });
 
         else res.status(200).json(res.locals);
 });
@@ -137,23 +107,25 @@ app.post(
 );
 
 //**  Message Submit for database storage and translation  **/
-app.post(
-  '/send',
-  //middleware that checks the message, and stores it pre translation if entry is good
-  translationController.createSentMessage,
-  //middleware that translates the message if need be and stores it in locals
-  translationController.sendForTranslation,
-  //middleware that stores the translated message
-  translationController.createTranslatedMessage,
-  //middleware that grabs the new message list to allow state to update with response
-  translationController.getMessages,
-  //anon function that sends the response
-  (req, res) => {
-    res.status(200).json(res.locals);
-  }
-);
+app.post('/send', 
+    //middleware that checks the message, and stores it pre translation if entry is good
+    translationController.findFriend, 
+    //middleware that translates the message if need be and stores it in locals
+    translationController.sendForTranslation, 
+    //middleware that stores the translated message
+    translationController.createMessage, 
+    //middleware that grabs the new message list to allow state to update with response
+    translationController.getMessages,
+    //anon function that sends the response
+    (req, res) =>{
+        res.status(200).json(res.locals);
+})
 
 // route handler to delete sessions and remove cookies
+
+// app.get('/testing', sandboxController.getRecentMessagesArray, (req, res) =>{
+//   return res.status(200).json([])
+// });
 
 //route handler to serve the basic file
 app.get('/', (req, res) => {

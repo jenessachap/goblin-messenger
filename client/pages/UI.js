@@ -93,6 +93,7 @@ class UI extends Component {
           password.value = '';
           this.props.login(data);
         }
+        const currentUser = this.props.user;
         console.log('current user ', this.props.user)
       })
       .catch(err => console.log('Error logging in user! ERROR: ', err));
@@ -104,7 +105,7 @@ class UI extends Component {
     console.log('singingUp?', this.props.signingUp);
     if (this.props.loggedIn === 'true') {
       // return messenger container
-      return (<Home />)
+      return (<Home currentUser={this.props.user}/>)
     }
     if (this.props.signingUp) { // === 'true'
       // return signup page

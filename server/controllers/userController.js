@@ -23,7 +23,8 @@ userController.findOneUser = (req, res, next) => {
       if (data) {
         console.log("existing user:", data);
         res.locals.rejectNewUser = true;
-      } else res.locals.rejectNewUser = false;
+      } 
+      else res.locals.rejectNewUser = false;
       return next();
     })
     .catch((err) =>
@@ -83,10 +84,12 @@ userController.verifyUser = (req, res, next) => {
       console.log(`This is the verify user response from the db: ${response}`);
       if (response === null) {
         res.locals.userUnknown = true;
-      } else if (password === response.password) {
+      } 
+      else if (password === response.password) {
         console.log(`User logged in as username: ${username}`);
         res.locals.user = response;
-      } else res.locals.noMatch = true;
+      } 
+      else res.locals.noMatch = true;
       return next();
     });
   } 
