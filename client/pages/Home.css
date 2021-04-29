@@ -83,9 +83,9 @@
 }
 
 .userNavBarButton:hover {
-  background-color: whitesmoke; 
-  border-color: #5d7bcc;
-  color: #5d7bcc;
+  cursor: pointer;
+  background-color: #df5210; 
+  border-color: #df5210;
 }
 
 .NavButton {
@@ -109,8 +109,8 @@
 
 .NavButton:hover {
   cursor: pointer;
-  background-color: #df5210; 
-  border-color: #df5210;
+  background-color: #df1e10; 
+  border-color: #df1e10;
 }
 
 .sendButton {

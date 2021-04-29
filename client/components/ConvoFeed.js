@@ -43,10 +43,9 @@ class ConvoFeed extends Component {
     ]
     const ConvoFeedContent = conversationMessage.map((message) => {
       return (
-        <div className="ConvoFeedContent-Row" key={message.timeSent}>
+        <div className="ConvoFeedContent-Row" key={message.timeSent} >
           <div className={`ConvoFeedContent-Text ${message.senderUsername === "pink" ? "User" : "Friend"}`}>
             {message.senderUsername === "pink" ? message.sentText : message.transText}
-
           </div>
         </div>
       )
