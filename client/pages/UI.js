@@ -100,13 +100,20 @@ class UI extends Component {
 
   render() {
     console.log('rerendering')
+    console.log('logged_in_state', this.props.loggedIn);
+    console.log('singingUp?', this.props.signingUp);
     if (this.props.loggedIn === 'true') {
       // return messenger container
       return (<Home />)
     }
     if (this.props.signingUp) { // === 'true'
       // return signup page
-      return (<Signup signup={this.userSignedUp} returnToLogin={this.props.nowLoggedIn}/>)
+      return (
+      <Signup 
+          signup={this.userSignedUp} 
+          returnToLogin={this.props.nowLoggedIn}
+          stopSignUp={this.props.nowSigningUp}
+      />)
     } else {
       // return login page
       return (<Login info={this.props.loggedIn} onSignUpClick={this.props.nowSigningUp} submitLogin={this.userLoggedIn} />)
