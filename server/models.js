@@ -16,22 +16,19 @@ mongoose.connect(MONGO_URI, {
 
 const Schema = mongoose.Schema;
 
-const sentMessageSchema = new Schema({
-    senderId: {type: String, required: true},
-    senderLang: {type: String, required: true},
-    senderUsername: {type: String, required: true},
-    receiverUsername: {type: String, required: true},
-    receiverId: {type: String, required: true},
-    receiverLang: {type: String, required: true},
-    // input: {type: String, required: true}
-
-    //iteration idea
-    sentMessage: {type: String, required: true},
-    translatedMessage: {type: String, required: true}
-
-
+const messageSchema = new Schema({
+  senderId: {type: String, required: true},
+  senderLang: {type: String, required: true},
+  senderUsername: {type: String, required: true},
+  receiverUsername: {type: String, required: true},
+  receiverId: {type: String, required: true},
+  receiverLang: {type: String, required: true},
+  sentText: {type: String, required: true},
+  transText: {type: String, required: true},
+  timeSent: { type: Date, default: Date.now}
 });
-const SentMess = mongoose.model('sent_messages', sentMessageSchema);
+
+const Messages = mongoose.model('messages', messageSchema);
 
 
 const transMessageSchema = new Schema({
@@ -63,7 +60,7 @@ const userSchema = new Schema({
   const Session = mongoose.model('Session', sessionSchema);
 
 module.exports = {
-    SentMess,
+    Messages,
     TransMess,
     User,
     Session

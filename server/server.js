@@ -7,6 +7,7 @@ const translationController = require('./controllers/translationControllers');
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const sandboxController = require('./controllers/sandboxController')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -155,7 +156,6 @@ app.post(
 // route handler to delete sessions and remove cookies
 
 app.get('/testing', sandboxController.getFirstMessageInConvo, (req, res) =>{
-  
   return res.status(200).json([])
 });
 
