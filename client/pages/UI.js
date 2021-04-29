@@ -50,10 +50,16 @@ class UI extends Component {
         //check if user created succesfully, then login, 
         // (?) then clear the values from the object for safety
         if (data.hasAccount) {
+          this.props.nowLoggedIn(null);
           this.props.nowSigningUp(false);
+        }
+        else if (data.badInput) {
+          this.props.nowSigningUp(true);
         }
         else {
           this.props.login(data);
+          this.props.nowSigningUp(false);
+          console.log(this.props.loggedIn)
           // console.log(this.props.loggedIn)
           username.value = '';
           password.value = '';
@@ -87,7 +93,7 @@ class UI extends Component {
           this.props.nowSigningUp(null);
           username.value = '';
           password.value = '';
-          this.props.login(data)
+          this.props.login(data);
         }
         const currentUser = this.props.user;
         // console.log('current user ', this.props.user)
@@ -96,14 +102,21 @@ class UI extends Component {
   }
 
   render() {
-    // console.log('rerendering')
+    console.log('rerendering')
+    console.log('logged_in_state', this.props.loggedIn);
+    console.log('singingUp?', this.props.signingUp);
     if (this.props.loggedIn === 'true') {
       // return messenger container
       return (<Home currentUser={this.props.user}/>)
     }
     if (this.props.signingUp) { // === 'true'
       // return signup page
-      return (<Signup signup={this.userSignedUp} />)
+      return (
+      <Signup 
+          signup={this.userSignedUp} 
+          returnToLogin={this.props.nowLoggedIn}
+          stopSignUp={this.props.nowSigningUp}
+      />)
     } else {
       // return login page
       return (<Login info={this.props.loggedIn} onSignUpClick={this.props.nowSigningUp} submitLogin={this.userLoggedIn} />)

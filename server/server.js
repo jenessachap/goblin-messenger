@@ -67,6 +67,7 @@ app.get(
 //when signup buttong is triggered, lanches a post req;
 app.post('/signup', 
     //first go to the create user middleware
+    userController.findOneUser,
     userController.createUser,
     //then go to start session
     sessionController.startSession,
@@ -77,6 +78,7 @@ app.post('/signup',
     (req, res) => {
         //once all the above is complete, respond with redirecting to main message page
         if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
+        else if (res.locals.badInput) res.status(200).json({ badInput: true });
 
         else res.status(200).json(res.locals);
 });
