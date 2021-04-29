@@ -12,7 +12,6 @@ class RecentConvos extends Component {
     super(props);
     this.state = {
       recentConvos: [],
-      allMessages: []
     }
 
     //bind this to onclick

@@ -25,6 +25,7 @@ const messageSchema = new Schema({
     receiverLang: {type: String, required: true},
     sentText: {type: String, required: true},
     transText: {type: String, required: true},
+    userTranslation: {type: String, required: true},
     timeSent: { type: Date, default: Date.now}
 });
 const Messages = mongoose.model('messages', messageSchema);

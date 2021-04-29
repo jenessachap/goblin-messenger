@@ -49,7 +49,8 @@ translationController.findFriend = async (req, res, next) => {
         res.locals.noRecipient = true;
         return res.status(200).json(res.locals);
     }
-
+    const userUsername = req.body.senderUsername;
+    const userLanguage = req.body.senderLanguage;
     // this gets the friend's, info like language, id, etc.
     //Not sure if this req.body.friendUsername is correct, it might actually be req.body.username or possibly recipiant. 
     await User.findOne({username: req.body.targetUsername})
@@ -65,6 +66,9 @@ translationController.findFriend = async (req, res, next) => {
         } else {
             //storing the friend's user info into local.friend
             res.locals.friend = response;
+            //storing the user's own language for translation.
+            res.locals.userLanguage = userLanguage;
+            // console.log(`this is the user's language ${userLanguage}`)
             next();
         }
     })
@@ -81,6 +85,8 @@ translationController.findFriend = async (req, res, next) => {
 //should also check to make sure that it knows what language the message sent should be sent in
 translationController.sendForTranslation = async (req, res, next) => {
     console.log(`this is the request for translation ${req.body}`);
+    console.log(`this is the user's language ${res.locals.userLanguage}`);
+
 
     //check to see if translation is necessary, if not just pass along message
     if (res.locals.friend.language === req.body.language){
@@ -88,7 +94,8 @@ translationController.sendForTranslation = async (req, res, next) => {
         console.log(`translated text did not need translation: ${res.locals.translation}`)
         next();
     } else {
-        res.locals.translation = await textTranslate(req.body.message, res.locals.friend.language)
+        res.locals.translation = await textTranslate(req.body.message, res.locals.friend.language);
+        res.locals.userTranslation = await textTranslate(req.body.message, res.locals.userLanguage);
         next();
     }
 
@@ -107,12 +114,15 @@ translationController.createMessage = async (req, res, next) => {
         receiverId: res.locals.friend._id,
         receiverLang: res.locals.friend.language,
         sentText: req.body.message,
-        transText: res.locals.translation
+        transText: res.locals.translation,
+        userTranslation: res.locals.userTranslation
       })
     .then((newMessage) => {
-        console.log(`we should have a new message in the database`)
+        console.log(`we should have a new message in the database `)
           //store the newly created message in locals to be able to send to the API for translation
           res.locals.message = newMessage;
+          console.log(newMessage.userTranslation)
+
           next();
         })
     .catch((err)=>{

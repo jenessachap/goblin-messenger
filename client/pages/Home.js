@@ -66,6 +66,7 @@ class Home extends Component {
     message.id = this.props.user._id;
     message.targetUsername = recipient.value;
     message.senderUsername = this.props.user.username;
+    message.senderLanguage = this.props.user.language;
     message.language = this.props.user.language;
     message.message = newmessage.value;
     fetch('/send', {
