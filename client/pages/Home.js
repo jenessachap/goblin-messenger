@@ -108,7 +108,7 @@ class Home extends Component {
           myMessagesClick={this.myMessagesButton}
         />
         <RecentConvos user={this.props.user}/>
-        {/* <ConvoFeed /> */}
+        <ConvoFeed />
       </div>
     )
   }

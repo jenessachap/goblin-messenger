@@ -9,9 +9,9 @@ class RecentConvoButton extends Component {
 
         console.log(this.props.convoName)
 
-    
+    //onclick functionality I believe should be linked up with redux, and currently I just slapped this page together with react.
         return(
-            <button className="FriendContainerButton" >
+            <button className="FriendContainerButton" onClick={() => props.newView(this.props.convoName)}>
                 {/* //top bolded friend name */}
                 <div className="FriendName">{this.props.convoName}</div>
                 {/* most recent message, needs conditional for if sent self, render "sentText" else "transText"  */}
