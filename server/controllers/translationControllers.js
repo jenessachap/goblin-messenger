@@ -130,16 +130,23 @@ translationController.createMessage = async (req, res, next) => {
 // as well as the messages that the user has sent pre translation.  
 
 translationController.getMessages = async (req, res, next) => {
-    const userUsername = res.locals.user.username;
-    const friendUsername = req.params.username;
+
         console.log(`this is the getMessage`)
 
     await Messages.find(
+
+        // $and: [
+        //     { $or: [{"senderUsername": res.locals.user.username},
+        //     {"senderUsername": req.params.username}] },
+        //     { $or: [{"receiverUsername": res.locals.user.username}, 
+        //     {"receiverUsername": req.params.username}] }
+        // ]
+        
         { $or: [
-            {"senderUsername": userUsername},
-            {"senderUsername": friendUsername}, 
-            {"receiverUsername": userUsername}, 
-            {"receiverUsername": friendUsername}
+            {"senderUsername": res.locals.user.username},
+            {"senderUsername": req.params.username}, 
+            {"receiverUsername": res.locals.user.username}, 
+            {"receiverUsername": req.params.username}
         ]
     })
     .then((messageFeed) => {
