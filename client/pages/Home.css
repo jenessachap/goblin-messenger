@@ -155,10 +155,10 @@
   border-radius: 12px;
   width: 40%;
   min-width: 200px;
-display: flex;
+  display: flex;
   flex-direction: row;
   justify-self: center;
-margin: 0 auto;
+  margin: 0 auto;
 }
 .message {
   font-weight: bolder;

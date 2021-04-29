@@ -60,6 +60,7 @@ class UI extends Component {
           this.props.login(data);
           this.props.nowSigningUp(false);
           console.log(this.props.loggedIn)
+          // console.log(this.props.loggedIn)
           username.value = '';
           password.value = '';
         }
@@ -85,7 +86,7 @@ class UI extends Component {
       .then(resp => resp.json())
       .then(data => {
         //check if user verified succesfully, then login
-        console.log(data)
+        // console.log(data)
         if (data.noMatch) { this.props.nowLoggedIn('wrongPassword') }
         else if (data.userUnknown) { this.props.nowLoggedIn('unknownUser') }
         else {
@@ -95,7 +96,7 @@ class UI extends Component {
           this.props.login(data);
         }
         const currentUser = this.props.user;
-        console.log('current user ', this.props.user)
+        // console.log('current user ', this.props.user)
       })
       .catch(err => console.log('Error logging in user! ERROR: ', err));
   }
