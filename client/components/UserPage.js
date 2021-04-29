@@ -86,7 +86,11 @@ const UserPage = props => {
                     >Back</button>
                     <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>Create New</button>
                     {/* <button className="userNavBarButton" onClick={() => props.newView('sentmessages')}>Sent Messages</button>
+<<<<<<< HEAD
                     <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */} 
+=======
+                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */}
+>>>>>>> b6c3737f3f61053042e91111b21c171deecb79d8
                 </div>
                 <div>
                     {content}

@@ -7,6 +7,7 @@ const translationController = require('./controllers/translationControllers');
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const messageController = require('./controllers/messageController')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -30,6 +31,13 @@ app.get('/signup', (req, res) => {
   res.render('./..client/signup', { error: null });
 });
 
+app.get('/messages/recent', 
+  cookieController.findUserByCookie,
+  messageController.getRecentMessages, 
+  (req, res) => {
+    res.status(200).json(res.locals.recentMessages);
+})
+
 app.get(
   '/messages/:username',
   //gets user info based on the cookie associated with get request
@@ -43,18 +51,6 @@ app.get(
   }
 );
 
-
-
-//
-app.get ('/messages/:username', 
-    //gets user info based on the cookie associated with get request
-    cookieController.findUserByCookie, 
-    //uses user info from previous middleware to 
-    translationController.getMessages, 
-    //sends along pertinent info
-    (req, res) =>{
-        res.status(200).json(res.locals);
-})
 
 //logout route to end session and clear cookie
 app.get(
@@ -124,6 +120,10 @@ app.post('/send',
 })
 
 // route handler to delete sessions and remove cookies
+
+// app.get('/testing', sandboxController.getRecentMessagesArray, (req, res) =>{
+//   return res.status(200).json([])
+// });
 
 //route handler to serve the basic file
 app.get('/', (req, res) => {
