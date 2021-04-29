@@ -37,8 +37,11 @@ userController.findOneUser = (req, res, next) => {
 userController.createUser = async (req, res, next) => {
   console.log(req.body);
   const { username, password, language } = req.body;
-  if (username === "" || password === "" || language === "")
-    res.locals.rejectNewUser = true;
+  if (username === "" || password === "" || language === "") {
+    res.locals.badInput = true;
+    return next();
+  }
+
   if (res.locals.rejectNewUser) return next();
 
   console.log("username, password", username, password);
@@ -48,7 +51,8 @@ userController.createUser = async (req, res, next) => {
     const newUser = await User.create({ username, password, language });
     res.locals.user = newUser;
     return next();
-  } catch (err) {
+  } 
+  catch (err) {
     User.findOne({ username }, (err, response) => {
       if (username === response) {
         return next(err, {
@@ -84,7 +88,8 @@ userController.verifyUser = (req, res, next) => {
       } else res.locals.noMatch = true;
       return next();
     });
-  } catch (err) {
+  } 
+  catch (err) {
     return next(err);
   }
 };

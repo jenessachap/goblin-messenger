@@ -52,6 +52,9 @@ class UI extends Component {
         if (data.hasAccount) {
           this.props.nowSigningUp(false);
         }
+        else if (data.badInput) {
+          this.props.nowSigningUp(true);
+        }
         else {
           this.props.login(data);
           console.log(this.props.loggedIn)

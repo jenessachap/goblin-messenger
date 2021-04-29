@@ -1,8 +1,8 @@
-const { User, TransMess, SentMess } = require("../models");
-const { Translate } = require("@google-cloud/translate").v2;
-const path = require("path");
+const { User, TransMess, SentMess } = require('../models');
+const { Translate } = require('@google-cloud/translate').v2;
+const path = require('path');
 const translationController = {};
-const projectId = "112305914504973967363";
+const projectId = '112305914504973967363';
 //the service account file is the file associated with the project on Whit's google drive account
 //get in contact with him to figure out how to get a copy that won't be put on github for security reasons
 //or to start your own account and set up the serviceAccountFile
@@ -10,7 +10,7 @@ const projectId = "112305914504973967363";
 //but just try to avoid sending looping calls to translate, ya feel?
 const keyFilename = path.resolve(
   __dirname,
-  "./../pandawhaleiterationproject-ce75c9c97be2.json"
+  './../pandawhaleiterationproject-ce75c9c97be2.json'
 );
 const tranlsate = new Translate({ projectId, keyFilename });
 
@@ -21,7 +21,7 @@ async function textTranslate(text, target) {
   let translation = await tranlsate.translate(text, target);
   console.log(`this is after api call`);
 
-  console.log("Translation:" + translation);
+  console.log('Translation:' + translation);
   //the returned value is an array with the first index being a string,
   //the second index being data about the call
   return translation[0];
@@ -40,14 +40,14 @@ async function textTranslate(text, target) {
     message: the actual text to translate
 }*/
 translationController.createSentMessage = async (req, res, next) => {
-  console.log("createSent fired");
+  console.log('createSent fired');
   console.log(req.body.message);
   //conditional to make sure that the request wasn't sent with any required fields empty
-  if (req.body.message == "") {
+  if (req.body.message == '') {
     res.locals.noMessage = true;
     return res.status(200).json(res.locals);
   }
-  if (req.body.targetUsername == "") {
+  if (req.body.targetUsername == '') {
     res.locals.noRecipient = true;
     return res.status(200).json(res.locals);
   }
@@ -82,7 +82,7 @@ translationController.createSentMessage = async (req, res, next) => {
           log: `translationController.CreateSentMessage: ERROR: Did not properly create new sent message`,
           message: {
             err:
-              "translationController.CreateSentMessage: ERROR: Check server logs for details",
+              'translationController.CreateSentMessage: ERROR: Check server logs for details',
           },
         });
     });
@@ -109,7 +109,7 @@ translationController.sendForTranslation = async (req, res, next) => {
 //the translated message will have the ID's of the sender and recipient included to allow for specific lookup of
 //only the desired messages
 translationController.createTranslatedMessage = async (req, res, next) => {
-  console.log("create transMess fired");
+  console.log('create transMess fired');
   TransMess.create({
     senderId: req.body.id,
     senderLang: req.body.language,
@@ -127,7 +127,10 @@ translationController.createTranslatedMessage = async (req, res, next) => {
 // as well as the messages that the user has sent pre translation.
 
 translationController.getMessages = async (req, res, next) => {
-  if (res.locals.rejectNewUser) return next();
+  if (
+    res.locals.rejectNewUser ||
+    res.locals.badInput
+  ) return next();
 
   if (res.locals.user) {
     console.log(req.params.username);

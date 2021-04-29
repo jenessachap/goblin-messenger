@@ -108,6 +108,7 @@ app.post('/signup',
     (req, res) => {
         //once all the above is complete, respond with redirecting to main message page
         if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
+        if (res.locals.badInput) res.status(200).json({ badInput: true });
 
         else res.status(200).json(res.locals);
 });
