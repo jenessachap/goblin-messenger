@@ -7,7 +7,11 @@ import logo from '../img/logo.svg';
 //referred to as ISO language codes, specifically the 639-1 which specify how the API
 //knows what language the message sent is in, and what the recipient's language to translate to is
 const Signup = props => {
-  const { returnToLogin, signup } = props;
+  const { 
+    returnToLogin, 
+    stopSignUp, 
+    signup 
+  } = props;
 
   return (
     <div className="loginsignuppage">
@@ -38,13 +42,14 @@ const Signup = props => {
             <option value="hu"> Hungarian </option>
             <option value="it"> Italian </option>
           </select>
-          <button className="loginSignupButton" onClick={props.signup}>Sign Up</button>
+          <button className="loginSignupButton" onClick={signup}>Sign Up</button>
           <button 
             className="backToLoginButton" 
             onClick={() => {
               // console.log('return to login', returnToLogin);
               // console.log('sign up', signup);
-              props.stopSignUp(null);
+              props.returnToLogin(null);
+              stopSignUp(null);
               // props.returnToLogin();
             }}
           >
