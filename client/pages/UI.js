@@ -50,6 +50,7 @@ class UI extends Component {
         //check if user created succesfully, then login, 
         // (?) then clear the values from the object for safety
         if (data.hasAccount) {
+          this.props.nowLoggedIn(null);
           this.props.nowSigningUp(false);
         }
         else if (data.badInput) {

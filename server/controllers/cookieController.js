@@ -5,7 +5,9 @@ const { User } = require("./../models.js");
 cookieController.setSSIDCookie = (req, res, next) => {
   if (
     res.locals.rejectNewUser ||
-    res.locals.badInput
+    res.locals.badInput ||
+    res.locals.userUnknown ||
+    res.locals.noMatch
   ) return next();
 
   console.log(`we're in the cookie controller now`);

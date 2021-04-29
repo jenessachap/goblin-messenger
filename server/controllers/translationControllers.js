@@ -132,7 +132,9 @@ translationController.createMessage = async (req, res, next) => {
 translationController.getMessages = async (req, res, next) => {
   if (
     res.locals.rejectNewUser ||
-    res.locals.badInput
+    res.locals.badInput ||
+    res.locals.userUnknown ||
+    res.locals.noMatch
   ) return next();
 
         console.log(`this is the getMessage`)
