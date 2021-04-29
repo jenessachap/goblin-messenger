@@ -37,12 +37,13 @@ userController.findOneUser = (req, res, next) => {
 userController.createUser = async (req, res, next) => {
   console.log(req.body);
   const { username, password, language } = req.body;
-  if (username === "" || password === "" || language === "") {
+
+  if (res.locals.rejectNewUser) return next();
+
+  else if (username === "" || password === "" || language === "") {
     res.locals.badInput = true;
     return next();
   }
-
-  if (res.locals.rejectNewUser) return next();
 
   console.log("username, password", username, password);
 

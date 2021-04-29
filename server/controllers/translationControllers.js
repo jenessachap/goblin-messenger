@@ -132,7 +132,7 @@ translationController.getMessages = async (req, res, next) => {
     res.locals.badInput
   ) return next();
 
-  if (res.locals.user) {
+  else if (res.locals.user) {
     console.log(req.params.username);
 
     res.locals.messages = {};

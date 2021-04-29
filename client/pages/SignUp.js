@@ -48,7 +48,7 @@ const Signup = props => {
             onClick={() => {
               // console.log('return to login', returnToLogin);
               // console.log('sign up', signup);
-              props.returnToLogin(null);
+              returnToLogin(null);
               stopSignUp(null);
               // props.returnToLogin();
             }}
