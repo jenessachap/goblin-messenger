@@ -5,3 +5,5 @@ export const SIGNUP_STATE = "SIGNUP_STATE";
 export const VIEW = "VIEW";
 export const USER_INFO = "USER_INFO";
 export const UPDATE_MESSAGES = "UPDATE_MESSAGES";
+export const UPDATE_CONVO_NAME = "UPDATE_CONVO_NAME";
+export const UPDATE_CONVO_MESSAGES = "UPDATE_CONVO_MESSAGES";

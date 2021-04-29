@@ -1,4 +1,5 @@
 import * as types from './actionTypes.js';
+import {dispatch} from 'react-redux';
 
 // action to update the current login state (is a user logged in?)
 export const loggedinState = (info) => ({
@@ -42,4 +43,37 @@ export const updateMessages = (messages) => ({
     payload: messages
 })
 
+
+export const setConvoName = (convoName) => ({
+    type: types.UPDATE_CONVO_NAME,
+    payload: convoName
+})
+
+export function updateConvoMessages(convoName) {
+    return function (dispatch, getState) {
+        return fetch(`/messages/${convoName}`)
+            .then(data => data.json())
+            .then(data => {
+            console.log(`are you here? ${data}`)
+            dispatch({
+                type: types.UPDATE_CONVO_MESSAGES,
+                payload: data
+                })  
+            })
+            .catch((error) => console.log(`there's an error: ${error}`))
+    }     
+}
 // more functions
+
+// export function bindComments(postId) {
+//     return function(dispatch) {
+//         return API.fetchComments(postId).then(comments => {
+//             // dispatch
+//             dispatch({
+//                 type: BIND_COMMENTS,
+//                 comments,
+//                 postId
+//             });
+//         });
+//     };
+// }

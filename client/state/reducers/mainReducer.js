@@ -8,7 +8,9 @@ const initialState = {
     info: null,
     messages: {},
     view: 'userpage', //this state takes exact string inputs to 
-    user_info: null
+    user_info: null,
+    convoName: null,
+    convoMessages: []
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -18,6 +20,8 @@ const mainReducer = (state = initialState, action) => {
     let view;
     let messages;
     let user_info;
+    let convoName;
+    let convoMessages;
 
     switch (action.type) {
 
@@ -83,6 +87,20 @@ const mainReducer = (state = initialState, action) => {
             ...state,
             messages
         }
+
+        case types.UPDATE_CONVO_NAME:
+        convoName = action.payload;
+        return {
+            ...state,
+            convoName
+        }
+
+        case types.UPDATE_CONVO_MESSAGES:
+            convoMessages = action.payload;
+            return {
+                ...state,
+                convoMessages
+            }
 
         default:
             return state;
