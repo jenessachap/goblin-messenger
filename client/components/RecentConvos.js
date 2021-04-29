@@ -1,106 +1,44 @@
 import React, { Component } from 'react';
-
+import RecentConvoButton from './RecentConvoButton'
 import NewMessage from './NewMessage';
 import MessageBox from './MessageBox';
+import './RecentConvos.css';
+import './RecentConvoButton.css';
 
 
 class RecentConvos extends Component {
-    constructor (props){
-        super(props)
+  constructor (props){
+    super(props);
+    this.state = {
+      recentConvos: []
     }
-    render (props){
+  }
+  componentDidMount() {
+    fetch('/messages/recent')
+    .then(data => data.json())
+    .then(data => {
+      console.log(data)
+      this.setState({recentConvos: data})
+      // this.props.updateMessages(data);
+      // this.props.newView('userpage'); //this changes the state view
+    })
+    .catch((error) => console.log(`there's an error: ${error}`))
 
-        const allConversations = [ 
-            {
-              senderId: "6084d06d159e890779753ea0",
-              senderLang: "en",
-              senderUsername: "pink",
-              receiverUsername: "goku",
-              receiverId: "608622d8e574bf6e7Qwff32c",
-              receiverLang: "es",
-              sentText: "Hello Friend",
-              transText: "Hola amigo",
-              timeSent: 1619566886,
-            },
-            {
-              senderId: "6084d06d159e890779753ea0",
-              senderLang: "en",
-              senderUsername: "pink",
-              receiverUsername: "brian",
-              receiverId: "608622d8kl74bf6e741ff32c",
-              receiverLang: "es",
-              sentText: "Hello Enemy",
-              transText: "Hola enemiga",
-              timeSent: 1619568852,
-            },
-            {
-              senderId: "608622d8e571236e741ff32c",
-              senderLang: "es",
-              senderUsername: "kerri",
-              receiverUsername: "pink",
-              receiverId: "6084d06d159e890779753ea0",
-              receiverLang: "en",
-              sentText: "Tengo Hambre",
-              transText: "I'm hungry",
-              timeSent: 1619678952,
-            },
-            {
-              senderId: "6084d06d159e890779753ea0",
-              senderLang: "en",
-              senderUsername: "pink",
-              receiverUsername: "mtDew",
-              receiverId: "6084d0def59e890779753ea0",
-              receiverLang: "es",
-              sentText: "I'm hungry",
-              transText: "Tengo Hambre",
-              timeSent: 1619677782,
-            },
-            {
-              senderId: "608622drr574bf68441ff32c",
-              senderLang: "es",
-              senderUsername: "russ",
-              receiverUsername: "pink",
-              receiverId: "6084d06d159e890779753ea0",
-              receiverLang: "en",
-              sentText: "Tengo Hambre",
-              transText: "I'm hungry",
-               timeSent: 1619679252,
-            },
-            {
-              senderId: "6084d06d159e890779753ea0",
-              senderLang: "en",
-              senderUsername: "pink",
-              receiverUsername: "Chipotle",
-              receiverId: "6084d06ttre890779753ea0",
-              receiverLang: "es",
-              sentText: "I'm hungry",
-              transText: "Tengo Hambre",
-              timeSent: 1619778952,
-            },
-          ];
-        //   console.log(this.props)
-        const userLoggedInLanguage = this.props.language
-        const recentConvoArray = [];
-        for (let i = 0; i < allConversations.length; i += 1){
-            //container for most recent friend and message
-            <div className="FriendContainer">
-                {/* //top bolded friend name */}
-                <div className="FriendName">{allConversations[i].senderUsername}</div>
-                {/* most recent message, needs conditional for if sent self, render "sentText" else "transText"  */}
-                <div className="MostRecentText">{}</div>
-            </div>
-        }
-        
-    
+  }  
+  render (){
+console.log(this.state)
+    const recentConvoArray = [];
+    for (let i = 0; i < this.state.recentConvos.length; i += 1){
+      recentConvoArray.push(<RecentConvoButton convoName={this.state.recentConvos[i]._id} lastMsgText={this.state.recentConvos[i].msgText}/>)
+
+    }  
  
     return (
-     
-        <div>
-            {recentConvoArray}
-        </div>
-
+      <div className="FriendContainer">
+        {recentConvoArray}
+      </div>
     );
-    }
+  }
 }
 
 export default RecentConvos;

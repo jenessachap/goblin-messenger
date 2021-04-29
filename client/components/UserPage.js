@@ -87,7 +87,7 @@ const UserPage = props => {
                     <button className="userNavBarButton" onClick={() => props.newView('newmessage')}>Create New</button>
                     {/* <button className="userNavBarButton" onClick={() => props.newView('sentmessages')}>Sent Messages</button>
                     <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button> */} 
-                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>My messages</button>
+                    <button className="userNavBarButton" onClick={() => props.newView('userpage')}>Home</button>
                 </div>
                 <div>
                     {content}
