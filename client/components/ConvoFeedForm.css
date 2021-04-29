@@ -1,0 +1,56 @@
+.ConvoFeedForm-Container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 2em;
+}
+
+.ConvoFeedContent-Row {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.ConvoFeedForm-Form input[type="text"] {
+  margin-left: 5em;
+  border-radius: 3px;
+  margin-right: 1em;
+  margin: 10px;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.733);
+  border: solid;
+  border: none;
+  color: white;
+  padding: 11.25px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+
+.ConvoFeedForm-Form input[type="submit"] {
+  margin: 10px;
+  justify-content: center;
+  background-color: #5d7bcc; 
+  border: solid;
+  border: none;
+  color: white;
+  padding: 11.25px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+.ConvoFeedForm-Form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #df5210; 
+  border-color: #df5210;
+}

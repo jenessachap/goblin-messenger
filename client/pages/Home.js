@@ -3,6 +3,7 @@ import * as actions from '../state/actions/actions.js';
 import { connect } from 'react-redux';
 import UserPage from '../components/UserPage';
 import ConvoFeed from '../components/ConvoFeed';
+import ConvoFeedForm from '../components/ConvoFeedForm';
 import logo from '../img/logo.svg';
 import './Home.css';
 import RecentConvos from '../components/RecentConvos';
@@ -107,8 +108,11 @@ class Home extends Component {
           sentMessagesClick={this.sentMessagesButton}
           myMessagesClick={this.myMessagesButton}
         />
-        <RecentConvos user={this.props.user}/>
-        <ConvoFeed />
+        <div className="Home-ConvoFeed-Container">
+          <RecentConvos user={this.props.user} />
+          <ConvoFeed />
+          <ConvoFeedForm />
+        </div>
       </div>
     )
   }
