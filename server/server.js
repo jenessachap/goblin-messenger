@@ -47,7 +47,7 @@ app.get(
   //sends along pertinent info
   (req, res) => {
     console.log(req.params.username);
-    res.status(200).json(res.locals);
+    res.status(200).json(res.locals.convoFeed);
   }
 );
 
