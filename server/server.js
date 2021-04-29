@@ -93,12 +93,11 @@ app.post(
 
   // sessionController.startSession,
   // then set cookie
-
   cookieController.setSSIDCookie,
 
   // then get the translated message data for the user
-
-  translationController.getMessages,
+  //THIS WILL NEED TO CHANGE >> TK
+  // translationController.getMessages,
 
   (req, res) => {
     //not going to redirect, send a response of user info
