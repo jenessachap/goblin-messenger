@@ -57,6 +57,7 @@ class UI extends Component {
         }
         else {
           this.props.login(data);
+          this.props.nowSigningUp(false);
           console.log(this.props.loggedIn)
           username.value = '';
           password.value = '';
@@ -90,7 +91,7 @@ class UI extends Component {
           this.props.nowSigningUp(null);
           username.value = '';
           password.value = '';
-          this.props.login(data)
+          this.props.login(data);
         }
         console.log('current user ', this.props.user)
       })
