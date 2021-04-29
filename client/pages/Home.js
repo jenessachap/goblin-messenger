@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import * as actions from '../state/actions/actions.js';
 import { connect } from 'react-redux';
 import UserPage from '../components/UserPage';
+import ConvoFeed from '../components/ConvoFeed';
+import logo from '../img/logo.svg';
+import './Home.css';
 
 const mapStateToProps = store => ({
   user: store.message.user,
@@ -90,16 +93,22 @@ class Home extends Component {
   }
 
   render() {
-    return (<UserPage info={this.props.user_info}
-      send={this.sendMessage}
-      view={this.props.view}
-      newView={this.props.newView}
-      messages={this.props.messages}
-      user={this.props.user}
-      logout={this.props.nowLoggedIn}
-      sentMessagesClick={this.sentMessagesButton}
-      myMessagesClick={this.myMessagesButton}
-    />)
+    return (
+      <div className="Home-Container">
+        <img className="Home-Logo" id="userPageLogo" src={logo} alt="Multicommunicado" />
+        <UserPage info={this.props.user_info}
+          send={this.sendMessage}
+          view={this.props.view}
+          newView={this.props.newView}
+          messages={this.props.messages}
+          user={this.props.user}
+          logout={this.props.nowLoggedIn}
+          sentMessagesClick={this.sentMessagesButton}
+          myMessagesClick={this.myMessagesButton}
+        />
+        <ConvoFeed />
+      </div>
+    )
   }
 }
 

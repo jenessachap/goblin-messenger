@@ -1,12 +1,11 @@
-.userPageLogo img { 
+.Home-Logo { 
   margin: auto;
-  margin-top: 23vh;
+  margin-top: 25vh;
   margin-bottom: 2vh;
-  height: 18vh;
+  height: 15vh;
   border-radius: 8px;
   box-shadow: 0px 0px 10px 5px rgb(42, 65, 143);
-  display: block;
- 
+  display: block; 
 }
 
 .inputForm {
@@ -89,10 +88,9 @@
   background-color: whitesmoke; 
   border-color: #5d7bcc;
   color: #5d7bcc;
-
 }
 
-.logoutButton {
+.NavButton {
   margin: 10px;
   justify-content: center;
   background-color: #5d7bcc; 
@@ -111,7 +109,8 @@
   transition-duration: 0.4s;
 }
 
-.logoutButton:hover {
+.NavButton:hover {
+  cursor: pointer;
   background-color: #df5210; 
   border-color: #df5210;
 }
