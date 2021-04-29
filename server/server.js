@@ -150,6 +150,11 @@ app.post('/send',
 
 // route handler to delete sessions and remove cookies
 
+app.get('/testing', sandboxController.getFirstMessageInConvo, (req, res) =>{
+  
+  return res.status(200).json([])
+});
+
 //route handler to serve the basic file
 app.get('/', (req, res) => {
     //check for session, if session is active
