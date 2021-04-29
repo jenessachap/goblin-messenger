@@ -6,6 +6,7 @@ import ConvoFeed from '../components/ConvoFeed';
 import ConvoFeedForm from '../components/ConvoFeedForm';
 import logo from '../img/logo.svg';
 import './Home.css';
+import RecentConvos from '../components/RecentConvos';
 
 const mapStateToProps = store => ({
   user: store.message.user,
@@ -108,6 +109,7 @@ class Home extends Component {
           myMessagesClick={this.myMessagesButton}
         />
         <div className="Home-ConvoFeed-Container">
+          <RecentConvos user={this.props.user} />
           <ConvoFeed />
           <ConvoFeedForm />
         </div>
