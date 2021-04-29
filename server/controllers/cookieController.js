@@ -28,8 +28,12 @@ cookieController.findUserByCookie = (req, res, next) => {
   console.log(`this is the req from the findUserByCookie ${req}`);
 
     User.findOne({_id: req.cookies.ssid})
-      .then((response) => res.locals.user = response)
-      .then(next())
+      .then((response) => {
+        res.locals.user = response
+        console.log('this is the the user');
+        console.log(res.locals.user);
+        return next();
+      })
       .catch((err)=>{
           if (err) return next({
             log: `cookieController.findUserByCookie: ERROR: Did not properly find user by cookie`,
