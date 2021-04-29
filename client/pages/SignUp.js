@@ -23,6 +23,10 @@ const Signup = props => (
           <option value="ru"> Russian </option>
           <option value="tr"> Turkish </option>
           <option value="hi"> Hindi </option>
+          <option value="te"> Telugu </option>
+          <option value="ta"> Tamil </option>
+          <option value="gu"> Gujarati </option>
+          <option value="pa"> Punjabi </option>
           <option value="af"> Afrikaans </option>
           <option value="zh"> Chinese </option>
           <option value="ar"> Arabic </option>

@@ -18,6 +18,8 @@ cookieController.setSSIDCookie = (req, res, next) => {
 };
 
 cookieController.findUserByCookie = (req, res, next) => {
+  console.log(`this is the req from the findUserByCookie ${req}`);
+
     User.findOne({_id: req.cookies.ssid})
       .then((response) => res.locals.user = response)
       .then(next())
