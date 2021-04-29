@@ -141,18 +141,16 @@ translationController.getMessages = async (req, res, next) => {
 
     await Messages.find(
 
-        // $and: [
-        //     { $or: [{"senderUsername": res.locals.user.username},
-        //     {"senderUsername": req.params.username}] },
-        //     { $or: [{"receiverUsername": res.locals.user.username}, 
-        //     {"receiverUsername": req.params.username}] }
-        // ]
-        
-        { $or: [
-            {"senderUsername": res.locals.user.username},
-            {"senderUsername": req.params.username}, 
-            {"receiverUsername": res.locals.user.username}, 
-            {"receiverUsername": req.params.username}
+       { $or: [
+            { $and: [
+                {"senderUsername": res.locals.user.username},
+                {"receiverUsername": req.params.username}
+                ] 
+            },
+            { $and: [
+                {"receiverUsername": res.locals.user.username}, 
+                {"senderUsername": req.params.username}
+            ] }
         ]
     })
     .then((messageFeed) => {
