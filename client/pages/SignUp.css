@@ -1,1 +1,35 @@
-/* signup page styles go here */
+.backToLoginButton {
+  margin: 10px 20px;
+  justify-content: center;
+  background-color: #5d7bcc; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 12px;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2), 0 5px 5px 0 rgba(0,0,0,0.19);
+}
+
+.backToLoginButton:hover {
+  cursor: pointer;
+  background-color: #df5210; 
+  border-color: #df5210;
+}
+
+.loginSignupForm 
+  input[type="text"], 
+  input[type="password"] {
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+select#userLanguage {
+  
+  background-color: rgb(232, 240, 254); 
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}

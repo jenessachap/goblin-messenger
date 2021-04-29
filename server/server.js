@@ -31,12 +31,12 @@ app.get('/signup', (req, res) => {
   res.render('./..client/signup', { error: null });
 });
 
-app.get('/messages/recent', 
+app.get('/messages/recent',
   cookieController.findUserByCookie,
-  messageController.getRecentMessages, 
+  messageController.getRecentMessages,
   (req, res) => {
     res.status(200).json(res.locals.recentMessages);
-})
+  })
 
 app.get(
   '/messages/:username',
@@ -65,23 +65,23 @@ app.get(
 
 //** Signup **//
 //when signup buttong is triggered, lanches a post req;
-app.post('/signup', 
-    //first go to the create user middleware
-    userController.findOneUser,
-    userController.createUser,
-    //then go to start session
-    sessionController.startSession,
-    // then set cookie
-    cookieController.setSSIDCookie,
-    // get sent message data
-    translationController.getMessages,
-    (req, res) => {
-        //once all the above is complete, respond with redirecting to main message page
-        if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
-        else if (res.locals.badInput) res.status(200).json({ badInput: true });
+app.post('/signup',
+  //first go to the create user middleware
+  userController.findOneUser,
+  userController.createUser,
+  //then go to start session
+  sessionController.startSession,
+  // then set cookie
+  cookieController.setSSIDCookie,
+  // get sent message data
+  translationController.getMessages,
+  (req, res) => {
+    //once all the above is complete, respond with redirecting to main message page
+    if (res.locals.rejectNewUser) res.status(200).json({ hasAccount: true });
+    else if (res.locals.badInput) res.status(200).json({ badInput: true });
 
-        else res.status(200).json(res.locals);
-});
+    else res.status(200).json(res.locals);
+  });
 
 //** Login **//
 //when login button is triggered, launch post req
@@ -107,19 +107,19 @@ app.post(
 );
 
 //**  Message Submit for database storage and translation  **/
-app.post('/send', 
-    //middleware that checks the message, and stores it pre translation if entry is good
-    translationController.findFriend, 
-    //middleware that translates the message if need be and stores it in locals
-    translationController.sendForTranslation, 
-    //middleware that stores the translated message
-    translationController.createMessage, 
-    //middleware that grabs the new message list to allow state to update with response
-    translationController.getMessages,
-    //anon function that sends the response
-    (req, res) =>{
-        res.status(200).json(res.locals);
-})
+app.post('/send',
+  //middleware that checks the message, and stores it pre translation if entry is good
+  translationController.findFriend,
+  //middleware that translates the message if need be and stores it in locals
+  translationController.sendForTranslation,
+  //middleware that stores the translated message
+  translationController.createMessage,
+  //middleware that grabs the new message list to allow state to update with response
+  translationController.getMessages,
+  //anon function that sends the response
+  (req, res) => {
+    res.status(200).json(res.locals);
+  })
 
 // route handler to delete sessions and remove cookies
 

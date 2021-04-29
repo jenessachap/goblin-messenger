@@ -1,16 +1,16 @@
 import React from 'react';
 import logo from '../img/logo.svg';
-
+import './SignUp.css';
 //have signup and password input field 
 //with "signup" button and signup link
 //the two letter codes for the values of the selector are what are 
 //referred to as ISO language codes, specifically the 639-1 which specify how the API
 //knows what language the message sent is in, and what the recipient's language to translate to is
 const Signup = props => {
-  const { 
-    returnToLogin, 
-    stopSignUp, 
-    signup 
+  const {
+    returnToLogin,
+    stopSignUp,
+    signup
   } = props;
 
   return (
@@ -43,8 +43,8 @@ const Signup = props => {
             <option value="it"> Italian </option>
           </select>
           <button className="loginSignupButton" onClick={signup}>Sign Up</button>
-          <button 
-            className="backToLoginButton" 
+          <button
+            className="backToLoginButton"
             onClick={() => {
               // console.log('return to login', returnToLogin);
               // console.log('sign up', signup);
